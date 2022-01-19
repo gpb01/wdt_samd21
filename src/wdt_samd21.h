@@ -44,7 +44,7 @@
 #ifndef WDT_SAMD21
 #define WDT_SAMD21
 
-#include <wdt.h>
+#include <Arduino.h>
 
 void wdt_init ( unsigned long wdt_config_per =  WDT_CONFIG_PER_2K );
 
