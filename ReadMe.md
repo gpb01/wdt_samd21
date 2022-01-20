@@ -5,15 +5,14 @@
 
 
 
-A very simple library to activate, reset and deactivate the WDT on SAMD21.
+A very simple library to activate, reset and deactivate the WDT on ATSAMD21.
 
 Based on the work of MartinL ([https://forum.arduino.cc/u/MartinL]()) on Arduino forum (Apr, 2018)
 
 &nbsp;&nbsp;&nbsp;• © 2022 Guglielmo Braguglia<br>
 &nbsp;&nbsp;&nbsp;• © 2018 MartinL
 
-The wdt_samd21 library allows you, in a very simple way, to **activate** the WDT on SAMD21 MCU, to periodically **reset** the WDT and to **deactivate** the WDT, which are the normal functions for a simple use of the WDT as a control of the normal execution of a program.
-
+The wdt_samd21 library allows, in a very easy way, on ATSAMD21 MCU, to **activate**, to periodically **reset** and to **deactivate** the WDT (*Watch Dog Timer*), which are the normal required functions for a simple use of the WDT for checking the correct execution of an application program.
 
 ### Library usage and initialization
 
@@ -90,7 +89,7 @@ wdt_disable ( );
 ---
 ### Demo Program
 
-The following example initializes the WDT for a timeout of 2 seconds, after which, in the loop(), it performs a for structire with a delay() of one second at each iteration, but sending a wdt_reset() command to the WDT to avoid the restart. At the end of the for structure, a 4 second delay() is performed which causes the MCU to restart so, all that following the delay(), is never executed.
+The following example initializes the WDT for a timeout of 2 seconds, after which, in the loop(), it performs a for structure with a delay() of one second at each iteration, but sending a wdt_reset() command to the WDT to avoid the restart. At the end of the for structure, a 4 second delay() is performed which causes the MCU to restart so, all that following the delay(), is never executed.
 
 ```
 #include <wdt_samd21.h>
