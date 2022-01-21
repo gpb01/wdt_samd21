@@ -21,18 +21,18 @@ The wdt_samd21 library allows, in a very easy way, on ATSAMD21 MCU, to **activat
 To define the "*timeout*" of the WDT you can use the constants defined in the SAMD21 core, in the wdt.h file:
 
 ```
-WDT_CONFIG_PER_8        8 clock cycles
-WDT_CONFIG_PER_16      16 clock cycles
-WDT_CONFIG_PER_32      32 clock cycles
-WDT_CONFIG_PER_64      64 clock cycles
-WDT_CONFIG_PER_128    128 clock cycles
-WDT_CONFIG_PER_256    256 clock cycles
-WDT_CONFIG_PER_512    512 clock cycles
-WDT_CONFIG_PER_1K    1024 clock cycles
-WDT_CONFIG_PER_2K    2048 clock cycles
-WDT_CONFIG_PER_4K    4096 clock cycles
-WDT_CONFIG_PER_8K    8192 clock cycles
-WDT_CONFIG_PER_16K  16384 clock cycles
+WDT_CONFIG_PER_8        8 clock cycles ( 7.8 msec.)
+WDT_CONFIG_PER_16      16 clock cycles (15.6 msec.)
+WDT_CONFIG_PER_32      32 clock cycles (31.2 msec.)
+WDT_CONFIG_PER_64      64 clock cycles (62.5 msec.)
+WDT_CONFIG_PER_128    128 clock cycles ( 125 msec.)
+WDT_CONFIG_PER_256    256 clock cycles ( 250 msec.)
+WDT_CONFIG_PER_512    512 clock cycles ( 500 msec.)
+WDT_CONFIG_PER_1K    1024 clock cycles ( 1 sec.)
+WDT_CONFIG_PER_2K    2048 clock cycles ( 2 sec.)
+WDT_CONFIG_PER_4K    4096 clock cycles ( 4 sec.)
+WDT_CONFIG_PER_8K    8192 clock cycles ( 8 sec.)
+WDT_CONFIG_PER_16K  16384 clock cycles (16 sec.)
 
 ```
 
@@ -54,7 +54,7 @@ To use this library first you have to add, at the beginning of your program:
 
 ##### wdt_init( unsigned long wdt\_config\_per )
 
-Initialize the WDT with a timeout equal to the value passed as a parameter.
+Initialize the WDT with a timeout equal to the value passed as a parameter. It **must be** one of the values described in the "Customization" paragraph.
 
 Example:
 
@@ -66,7 +66,7 @@ wdt_init ( WDT_CONFIG_PER_1K );
 
 ##### wdt_reset( )
 
-**Must** be called before the *timeout* time passes to reset the WDT counter. If you do not call it in time, the MCU **reset**.
+**Must be** called before the *timeout* time passes to reset the WDT counter. If you do not call it in time, the MCU **reset**.
 
 Example:
 
