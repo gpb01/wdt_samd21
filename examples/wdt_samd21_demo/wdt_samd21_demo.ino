@@ -3,8 +3,8 @@
 void setup() {
    delay ( 500 );
    //
-   Serial.begin ( 9600 );
-   while ( !Serial ) {
+   SerialUSB.begin ( 9600 );
+   while ( !SerialUSB ) {
       delay ( 100 );
    }
    //
@@ -16,18 +16,18 @@ void loop() {
    for ( byte i = 0; i < 5; i++ ) {
       // wait a second
       delay ( 1000 );
-      // write on the serial port
-      Serial.print ( "Iteration " );
-      Serial.print ( i + 1 );
-      Serial.println ( " of 5" );
+      // write on the native serial USB port
+      SerialUSB.print ( "Iteration " );
+      SerialUSB.print ( i + 1 );
+      SerialUSB.println ( " of 5" );
       // "feed" the WDT to avoid restart
       wdt_reset();
    }
    //
    // now wait 4 seconds ... the WDT should restart the board
-   Serial.println ( "Now waiting for 4 seconds ..." );
+   SerialUSB.println ( "Now waiting for 4 seconds ..." );
    delay ( 4000 );
    //
-   Serial.println ( "You will never see this message printed" );
+   SerialUSB.println ( "You will never see this message printed" );
    delay ( 1000 );
 }
