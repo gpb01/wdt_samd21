@@ -91,3 +91,13 @@ void wdt_disable ( void ) {
    REG_WDT_CTRL = WDT_CTRL_RESETVALUE;               // Disable the WDT in normal mode
    while ( WDT->STATUS.bit.SYNCBUSY );               // Wait for synchronization
 }
+
+// ------------------ wdt_reEnable ----------------------
+
+void wdt_reEnable ( void ) {
+   //
+   // Enable the WDT
+   while ( WDT->STATUS.bit.SYNCBUSY );               // Check if the WDT registers are synchronized
+   REG_WDT_CTRL = WDT_CTRL_ENABLE;                   // Enable the WDT in normal mode
+   while ( WDT->STATUS.bit.SYNCBUSY );               // Wait for synchronization
+}

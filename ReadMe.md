@@ -1,9 +1,7 @@
 # wdt_samd21 Library
-© 2022 Guglielmo Braguglia
+© 2022 Guglielmo Braguglia, updated on Jul 2022.
 
 ---
-
-
 
 A very simple library to activate, reset and deactivate the WDT on ATSAMD21.
 
@@ -12,7 +10,7 @@ Based on the work of MartinL ([https://forum.arduino.cc/u/MartinL]()) on Arduino
 &nbsp;&nbsp;&nbsp;• © 2022 Guglielmo Braguglia<br>
 &nbsp;&nbsp;&nbsp;• © 2018 MartinL
 
-The wdt_samd21 library allows, in a very easy way, on ATSAMD21 MCU, to **activate**, to periodically **reset** and to **deactivate** the WDT (*Watch Dog Timer*), which are the normal required functions for a simple use of the WDT for checking the correct execution of an application program.
+The wdt_samd21 library allows, in a very easy way, on ATSAMD21 MCU, to **activate**, to periodically **reset**,  to **deactivate** and to **reactivate** the WDT (*Watch Dog Timer*), which are the normal required functions for a simple use of the WDT for checking the correct execution of an application program.
 
 ### Library usage and initialization
 
@@ -78,7 +76,7 @@ wdt_reset ( );
 
 ##### wdt_disable( )
 
-Disable the WDT until it is reactivated again with a wdt_init( ).
+Disable the WDT until it is reactivated again with a wdt_reEnable( ).
 
 Example:
 
@@ -87,9 +85,21 @@ wdt_disable ( );
 ```
 
 ---
+
+##### wdt_reEnable( )
+
+Re-enable the WDT disabled by a previous wdt_disable( ).
+
+Example:
+
+```
+wdt_reEnable ( );
+```
+
+---
 ### Demo Program
 
-The following example initializes the WDT for a timeout of 2 seconds, after which, in the loop(), it performs a for structure with a delay() of one second at each iteration, but sending a wdt_reset() command to the WDT to avoid the restart. At the end of the for structure, a 4 second delay() is performed which causes the MCU to restart so, all that following the delay(), is never executed.
+The following example initializes the WDT for a timeout of 2 seconds, after which, in the loop(), it performs a for structure with a delay() of one second at each iteration, but sending a wdt_reset() command to the WDT to avoid the restart. At the end of the for structure, the wdt is first disabled then, after a 3 second delay(), is enabled again and, finally, a 4 second delay() is performed which causes the MCU to restart so, all that following the last delay(), is never executed.
 
 ```
 #include <wdt_samd21.h>
@@ -118,14 +128,23 @@ void loop() {
       wdt_reset();
    }
    //
-   // now wait 4 seconds ... the WDT should restart the board
+   // now disable wdt and wait ...
+   wdt_disable();
+   Serial.println( "wdt disabled ..." );
+   Serial.println ( "Now waiting for 3 seconds ..." );
+   delay(3000);
+   //
+   // ... then reEnable the wdt ...
+   wdt_reEnable();
+   Serial.println( "wdt reEnabled ..." );
+   //
+   // ... and wait 4 seconds ... the WDT should restart the board
    Serial.println ( "Now waiting for 4 seconds ..." );
    delay ( 4000 );
    //
-   Serial.println ( "You will never see this message printed" );
+   Serial.println ( "*** You will never see this message printed ***" );
    delay ( 1000 );
 }
 ```
-
 
 ---

@@ -46,10 +46,16 @@
 
 #include <Arduino.h>
 
+#if !defined (__SAMD21G18A__)
+#error "This library is only for SAMD21G18A, compilation aborted."
+#endif
+
 void wdt_init ( unsigned long wdt_config_per =  WDT_CONFIG_PER_2K );
 
 void wdt_reset ( void );
 
 void wdt_disable ( void );
+
+void wdt_reEnable ( void );
 
 #endif
