@@ -3,6 +3,7 @@
    wdt_samd21: a very simple watch dog timer module for ATSAM D21
 
    (c) 2022 Guglielmo Braguglia
+   (c) 2025 Guglielmo Braguglia (fastReset() function added)
 
    Based on the work of MartinL:
    (c) 2018 MartinL (arduino forum: https://forum.arduino.cc/u/MartinL)
@@ -53,6 +54,8 @@
 void wdt_init ( unsigned long wdt_config_per =  WDT_CONFIG_PER_2K );
 
 void wdt_reset ( void );
+
+void wdt_fastReset ( void );
 
 void wdt_disable ( void );
 

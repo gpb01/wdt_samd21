@@ -2,6 +2,7 @@ wdt_samd21	KEYWORD1
 
 wdt_init	KEYWORD2
 wdt_reset	KEYWORD2
+wdt_fastReset	KEYWORD2
 wdt_disable	KEYWORD2
 wdt_reEnable	KEYWORD2
 

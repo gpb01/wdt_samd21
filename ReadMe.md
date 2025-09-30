@@ -1,5 +1,5 @@
 # wdt_samd21 Library
-© 2022 Guglielmo Braguglia, updated on Jul 2022.
+© 2022 Guglielmo Braguglia, updated on Sep 2025.
 
 ---
 
@@ -7,7 +7,7 @@ A very simple library to activate, reset and deactivate the WDT on ATSAMD21.
 
 Based on the work of MartinL ([https://forum.arduino.cc/u/MartinL]()) on Arduino forum (Apr, 2018)
 
-&nbsp;&nbsp;&nbsp;• © 2022 Guglielmo Braguglia<br>
+&nbsp;&nbsp;&nbsp;• © 2022, 2025 Guglielmo Braguglia<br>
 &nbsp;&nbsp;&nbsp;• © 2018 MartinL
 
 The wdt_samd21 library allows, in a very easy way, on ATSAMD21 MCU, to **activate**, to periodically **reset**,  to **deactivate** and to **reactivate** the WDT (*Watch Dog Timer*), which are the normal required functions for a simple use of the WDT for checking the correct execution of an application program.
@@ -70,6 +70,19 @@ Example:
 
 ```
 wdt_reset ( );
+```
+
+---
+
+##### wdt_fastReset( )
+
+**Must be** called before the *timeout* time passes to reset the WDT counter. If you do not call it in time, the MCU **reset**.
+It is the “**fast**” version of wdt_reset(); does not check the synchronization of the WDT register.
+
+Example:
+
+```
+wdt_fastReset ( );
 ```
 
 ---

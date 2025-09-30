@@ -3,6 +3,7 @@
    wdt_samd21: a very simple watch dog timer module for ATSAM D21
 
    (c) 2022 Guglielmo Braguglia
+   (c) 2025 Guglielmo Braguglia (fastReset() function added)
 
    Based on the work of MartinL:
    (c) 2018 MartinL (arduino forum: https://forum.arduino.cc/u/MartinL)
@@ -80,6 +81,16 @@ void wdt_reset ( void ) {
    while ( WDT->STATUS.bit.SYNCBUSY );               // Check if the WDT registers are synchronized
    REG_WDT_CLEAR = WDT_CLEAR_CLEAR_KEY;              // Clear the watchdog timer
    while ( WDT->STATUS.bit.SYNCBUSY );               // Wait for synchronization
+}
+
+// ------------------- wdt_fastReset -----------------------
+
+void wdt_fastReset ( void ) {
+   //
+   // Must be called periodically to reset the WDT and to avoid the restart
+   if (!WDT->STATUS.bit.SYNCBUSY) {                  // Check if the WDT registers are synchronized
+      REG_WDT_CLEAR = WDT_CLEAR_CLEAR_KEY;           // Clear the watchdog timer
+   }
 }
 
 // ------------------ wdt_disable ----------------------
